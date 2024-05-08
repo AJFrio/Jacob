@@ -1,10 +1,15 @@
 import ollama
-from elevenlabs import Voice, VoiceSettings, play
+from elevenlabs import Voice, VoiceSettings, play, stream
 from elevenlabs.client import ElevenLabs
+import functions as fn
 
 elevenKey = "615130847087d080f81d744df4515671"
 
-convo = []
+with open("prime.txt", "r") as f:
+    prime = f.read().replace("\n", " ")
+    f.close()
+
+convo = [{'role': 'system', 'content': prime}]
 
 client = ElevenLabs(
   api_key=elevenKey, # Defaults to ELEVEN_API_KEY
@@ -19,11 +24,19 @@ def speak(text: str):
         )
     )
     play(audio)
+"""
+def speak(text: str):
+    audio_stream = client.generate(
+    text=text,
+    stream=True
+    )
+    stream(audio_stream)
+"""
 
 
 def respond(response: str):
     print(response)
-    speak(response)
+    #speak(response)
     
 def ask(sentence: str  = "hello") -> str:
     global convo
