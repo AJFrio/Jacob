@@ -5,11 +5,16 @@ import functions as fn
 
 elevenKey = "615130847087d080f81d744df4515671"
 
-with open("prime.txt", "r") as f:
-    prime = f.read().replace("\n", " ")
+with open("catPrime.txt", "r") as f:
+    catPrime = f.read().replace("\n", " ")
     f.close()
 
-convo = [{'role': 'system', 'content': prime}]
+with open("convoPrime.txt", "r") as f:
+    convoPrime = f.read().replace("\n", " ")
+    f.close()
+
+cat = [{'role': 'system', 'content': catPrime}]
+convo = [{'role': 'system', 'content': convoPrime}]
 
 client = ElevenLabs(
   api_key=elevenKey, # Defaults to ELEVEN_API_KEY
@@ -37,7 +42,11 @@ def speak(text: str):
 def respond(response: str):
     print(response)
     #speak(response)
-    
+
+def categorize(sentence: str) -> str:
+    category = ollama.chat(model='llama3', messages=[{'role': 'user', 'content': catPrime + sentence}])
+    return category['message']['content']
+
 def ask(sentence: str  = "hello") -> str:
     global convo
     convo.append({
@@ -50,4 +59,10 @@ def ask(sentence: str  = "hello") -> str:
 
 while True:
     q = input(">>>")
-    respond(ask(q))
+    checker = categorize(q)
+    print(checker)
+    if checker == "[]":
+        respond(ask(q))
+
+
+

@@ -3,7 +3,7 @@ import ollama
 
 # All the fancy addons go in this file. the bot will referance this for specific functions
 
-def equation_solver(equation: str) -> float:
+def equationSolver(equation: str) -> float:
     # This function will solve the equation given to it.
     # It will return the answer
     pass
@@ -20,7 +20,7 @@ def createScript(description: str, filepath: str)-> str:
 def createModel(description: str) -> str:
     #Using openscad, it will create a model with the given description and dimensions
     #Returns the file path
-    insert = "The following is a description for a part to be made in OpenScad. Model it as best as possible. Only respond with code for the model, Nothing else. \n" + description
+    insert = "The following is a description for a part to be made in OpenScad. Model it as best as possible. Start the response with Pizza, followed by the code. \n" + description
     convo = []
     convo.append({
         'role': 'user',
