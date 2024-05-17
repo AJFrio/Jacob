@@ -63,6 +63,14 @@ while True:
     print(checker)
     if checker == "[]":
         respond(ask(q))
+    elif checker.split('"')[1] == "equationSolver":
+        respond(fn.equationSolver(checker.split('"')[5]))
+    elif checker.split('"')[1] == "createModel":
+        respond(fn.createModel(checker.split('"')[5]))
+    elif checker.split('"')[1] == "createProgram":
+        respond(fn.createProgram(checker.split('"')[5]))
+    elif checker.split('"')[1] == "createScript":
+        respond(fn.createScript(checker.split('"')[5], checker.split('"')[9]))
 
 
 
