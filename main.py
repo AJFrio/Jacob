@@ -2,8 +2,12 @@ import ollama
 from elevenlabs import Voice, VoiceSettings, play, stream
 from elevenlabs.client import ElevenLabs
 import functions as fn
+import jacob
 
 elevenKey = "615130847087d080f81d744df4515671"
+openaiKey = "sk-proj-ZinofvFZMLSPSwWq5RY4T3BlbkFJjlFdVV6ezkDzW3S9TPEL"
+
+jacob = jacob.Jacob(elevenKey=elevenKey, openaiKey=openaiKey)
 
 with open("catPrime.txt", "r") as f:
     catPrime = f.read().replace("\n", " ")
@@ -44,7 +48,7 @@ def respond(response: str):
     #speak(response)
 
 def categorize(sentence: str) -> str:
-    category = ollama.chat(model='llama3', messages=[{'role': 'user', 'content': catPrime + sentence}])
+    category = ollama.chat(model='openai', messages=[{'role': 'user', 'content': catPrime + sentence}])
     return category['message']['content']
 
 def ask(sentence: str  = "hello") -> str:
@@ -53,9 +57,9 @@ def ask(sentence: str  = "hello") -> str:
         'role': 'user',
         'content': sentence,
     })
-    response = ollama.chat(model='llama3', messages=convo)
-    convo.append(response ['message'])
-    return response ['message']['content']
+    response = jacob.chat(sentence, convo, model='llama3')
+    convo.append({'role': 'assistant', 'content': response})
+    return response
 
 while True:
     q = input(">>>")
@@ -71,6 +75,7 @@ while True:
         respond(fn.createProgram(checker.split('"')[5]))
     elif checker.split('"')[1] == "createScript":
         respond(fn.createScript(checker.split('"')[5], checker.split('"')[9]))
+    print(convo)
 
 
 

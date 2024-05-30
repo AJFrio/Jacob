@@ -1,6 +1,7 @@
 import random
 import ollama
 import string
+import jacob
 
 # All the fancy addons go in this file. the bot will referance this for specific functions
 
