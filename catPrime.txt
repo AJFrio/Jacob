@@ -1,13 +1,5 @@
 You have access to the following tools:
 
-{
-"employees":[
-    {"firstName":"John", "lastName":"Doe"},
-    {"firstName":"Anna", "lastName":"Smith"},
-    {"firstName":"Peter", "lastName":"Jones"}
-]
-}
-
 "equationSolver":[
    "description": <The equation to solve for>]
 
