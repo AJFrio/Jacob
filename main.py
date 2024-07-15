@@ -4,8 +4,8 @@ from elevenlabs.client import ElevenLabs
 import functions as fn
 import jacob
 
-elevenKey = "615130847087d080f81d744df4515671"
-openaiKey = "sk-proj-ZinofvFZMLSPSwWq5RY4T3BlbkFJjlFdVV6ezkDzW3S9TPEL"
+elevenKey = ""
+openaiKey = ""
 
 jacob = jacob.Jacob(elevenKey=elevenKey, openaiKey=openaiKey)
 
